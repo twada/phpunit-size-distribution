@@ -13,3 +13,4 @@ composer.phar
 
 # PHPUnit cache
 .phpunit.cache/
+.phpunit.result.cache
