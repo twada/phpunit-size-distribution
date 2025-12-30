@@ -56,4 +56,15 @@ final class TestSizeCollectorTest extends TestCase
         $this->assertSame(1, $collector->getLargeCount());
         $this->assertSame(1, $collector->getTotalCount());
     }
+
+    #[Test]
+    public function incrementNoneIncreasesNoneCount(): void
+    {
+        $collector = new TestSizeCollector();
+
+        $collector->incrementNone();
+
+        $this->assertSame(1, $collector->getNoneCount());
+        $this->assertSame(1, $collector->getTotalCount());
+    }
 }
