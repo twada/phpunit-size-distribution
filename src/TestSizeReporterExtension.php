@@ -10,7 +10,9 @@ use PHPUnit\Runner\Extension\ParameterCollection;
 use PHPUnit\TextUI\Configuration\Configuration;
 use Twada\PhpunitSizeRatio\Reporter\ConsoleReporter;
 use Twada\PhpunitSizeRatio\Subscriber\ExecutionFinishedSubscriber;
-use Twada\PhpunitSizeRatio\Subscriber\TestFinishedSubscriber;
+use Twada\PhpunitSizeRatio\Subscriber\TestPassedSubscriber;
+use Twada\PhpunitSizeRatio\Subscriber\TestFailedSubscriber;
+use Twada\PhpunitSizeRatio\Subscriber\TestErroredSubscriber;
 
 final class TestSizeReporterExtension implements Extension
 {
@@ -23,7 +25,9 @@ final class TestSizeReporterExtension implements Extension
         $reporter = new ConsoleReporter();
 
         $facade->registerSubscribers(
-            new TestFinishedSubscriber($collector),
+            new TestPassedSubscriber($collector),
+            new TestFailedSubscriber($collector),
+            new TestErroredSubscriber($collector),
             new ExecutionFinishedSubscriber($collector, $reporter),
         );
     }
