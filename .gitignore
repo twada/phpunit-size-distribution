@@ -10,3 +10,6 @@ composer.phar
 # Japanese documentation (not committed to repository)
 *.ja.md
 /attic/
+
+# PHPUnit cache
+.phpunit.cache/
