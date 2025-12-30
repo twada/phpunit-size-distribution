@@ -7,10 +7,16 @@ namespace Twada\PhpunitSizeRatio;
 final class TestSizeCollector
 {
     private int $smallCount = 0;
+    private int $mediumCount = 0;
 
     public function incrementSmall(): void
     {
         $this->smallCount++;
+    }
+
+    public function incrementMedium(): void
+    {
+        $this->mediumCount++;
     }
 
     public function getSmallCount(): int
@@ -20,7 +26,7 @@ final class TestSizeCollector
 
     public function getMediumCount(): int
     {
-        return 0;
+        return $this->mediumCount;
     }
 
     public function getLargeCount(): int
@@ -35,6 +41,6 @@ final class TestSizeCollector
 
     public function getTotalCount(): int
     {
-        return $this->smallCount;
+        return $this->smallCount + $this->mediumCount;
     }
 }

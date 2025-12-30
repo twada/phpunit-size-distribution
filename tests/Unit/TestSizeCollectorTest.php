@@ -34,4 +34,15 @@ final class TestSizeCollectorTest extends TestCase
         $this->assertSame(1, $collector->getSmallCount());
         $this->assertSame(1, $collector->getTotalCount());
     }
+
+    #[Test]
+    public function incrementMediumIncreasesMediumCount(): void
+    {
+        $collector = new TestSizeCollector();
+
+        $collector->incrementMedium();
+
+        $this->assertSame(1, $collector->getMediumCount());
+        $this->assertSame(1, $collector->getTotalCount());
+    }
 }
