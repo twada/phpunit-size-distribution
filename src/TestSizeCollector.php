@@ -8,6 +8,7 @@ final class TestSizeCollector
 {
     private int $smallCount = 0;
     private int $mediumCount = 0;
+    private int $largeCount = 0;
 
     public function incrementSmall(): void
     {
@@ -29,9 +30,14 @@ final class TestSizeCollector
         return $this->mediumCount;
     }
 
+    public function incrementLarge(): void
+    {
+        $this->largeCount++;
+    }
+
     public function getLargeCount(): int
     {
-        return 0;
+        return $this->largeCount;
     }
 
     public function getNoneCount(): int
@@ -41,6 +47,6 @@ final class TestSizeCollector
 
     public function getTotalCount(): int
     {
-        return $this->smallCount + $this->mediumCount;
+        return $this->smallCount + $this->mediumCount + $this->largeCount;
     }
 }
