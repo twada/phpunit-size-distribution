@@ -23,4 +23,15 @@ final class TestSizeCollectorTest extends TestCase
         $this->assertSame(0, $collector->getNoneCount());
         $this->assertSame(0, $collector->getTotalCount());
     }
+
+    #[Test]
+    public function incrementSmallIncreasesSmallCount(): void
+    {
+        $collector = new TestSizeCollector();
+
+        $collector->incrementSmall();
+
+        $this->assertSame(1, $collector->getSmallCount());
+        $this->assertSame(1, $collector->getTotalCount());
+    }
 }
