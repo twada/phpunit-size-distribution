@@ -23,8 +23,8 @@ final class ConsoleReporter
 
         return sprintf(
             <<<'TEXT'
-Test Size Distribution
-======================
+Test Size Ratio
+===============
 Small:  %2d tests (%5.1f%%)
 Medium: %2d tests (%5.1f%%)
 Large:  %2d tests (%5.1f%%)

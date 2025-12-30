@@ -22,8 +22,8 @@ final class ConsoleReporterTest extends TestCase
         $output = $reporter->generate($collector);
 
         $expected = <<<'TEXT'
-Test Size Distribution
-======================
+Test Size Ratio
+===============
 Small:   0 tests (  0.0%)
 Medium:  0 tests (  0.0%)
 Large:   0 tests (  0.0%)
@@ -55,8 +55,8 @@ TEXT;
         $output = $reporter->generate($collector);
 
         $expected = <<<'TEXT'
-Test Size Distribution
-======================
+Test Size Ratio
+===============
 Small:   5 tests ( 50.0%)
 Medium:  3 tests ( 30.0%)
 Large:   1 tests ( 10.0%)
