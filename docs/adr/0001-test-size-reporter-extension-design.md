@@ -47,16 +47,31 @@ We will develop `phpunit-size-ratio`, a PHPUnit extension that measures and repo
 
 #### 2. Event Subscription Strategy
 
-**Decision:** Subscribe to `Test\Finished` event and filter by test outcome
+**Decision:** Subscribe to `Test\Passed`, `Test\Failed`, and `Test\Errored` events individually
 
 **Rationale:**
-- `Test\Finished` fires after every test completion, regardless of outcome
-- Allows filtering out skipped and incomplete tests
-- More accurate than `Test\Prepared` which fires before execution (would include subsequently skipped tests)
+
+We investigated three approaches for excluding skipped tests:
+
+| Approach | Description | Evaluation |
+|----------|-------------|------------|
+| A | Subscribe to Passed/Failed/Errored individually | Simple, skipped tests automatically excluded |
+| B | Track skipped tests via Skipped event, filter in Finished | Complex, requires state tracking |
+| C | Filter by outcome in Finished event | Not feasible - Finished event lacks outcome info |
+
+Investigation of PHPUnit 12.x source code revealed:
+- `Test\Finished` event contains only `test()`, `numberOfAssertionsPerformed()`, and `telemetryInfo()`
+- No test outcome (passed/failed/skipped) information is available in Finished event
+- Event firing order: Outcome events (Skipped, Passed, Failed, etc.) → Finished event
+
+**Approach A was selected** because:
+- Skipped and MarkedIncomplete tests are automatically excluded (no explicit filtering needed)
+- Implementation is straightforward with no state tracking required
+- Each subscriber has a single, clear responsibility
 
 **Counting rules:**
 - **Include:** Passed, Failed, Errored tests
-- **Exclude:** Skipped, MarkedIncomplete tests
+- **Exclude:** Skipped, MarkedIncomplete tests (not subscribed)
 
 #### 3. Report Trigger
 
@@ -70,7 +85,9 @@ We will develop `phpunit-size-ratio`, a PHPUnit extension that measures and repo
 TestSizeReporterExtension (Entry point)
 ├── TestSizeCollector (Aggregates test size data)
 ├── Subscriber/
-│   ├── TestFinishedSubscriber (Captures each test's size)
+│   ├── TestPassedSubscriber (Counts passed tests by size)
+│   ├── TestFailedSubscriber (Counts failed tests by size)
+│   ├── TestErroredSubscriber (Counts errored tests by size)
 │   └── ExecutionFinishedSubscriber (Triggers report output)
 └── Reporter/
     └── ConsoleReporter (Formats text output)
