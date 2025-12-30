@@ -9,6 +9,6 @@
         </testsuite>
     </testsuites>
     <extensions>
-        <bootstrap class="Twada\PhpunitSizeRatio\TestSizeReporterExtension"/>
+        <bootstrap class="Twada\PhpunitSizeDistribution\TestSizeReporterExtension"/>
     </extensions>
 </phpunit>

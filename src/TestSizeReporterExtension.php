@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Twada\PhpunitSizeRatio;
+namespace Twada\PhpunitSizeDistribution;
 
 use PHPUnit\Runner\Extension\Extension;
 use PHPUnit\Runner\Extension\Facade;
 use PHPUnit\Runner\Extension\ParameterCollection;
 use PHPUnit\TextUI\Configuration\Configuration;
-use Twada\PhpunitSizeRatio\Reporter\ConsoleReporter;
-use Twada\PhpunitSizeRatio\Subscriber\ExecutionFinishedSubscriber;
-use Twada\PhpunitSizeRatio\Subscriber\TestPassedSubscriber;
-use Twada\PhpunitSizeRatio\Subscriber\TestFailedSubscriber;
-use Twada\PhpunitSizeRatio\Subscriber\TestErroredSubscriber;
+use Twada\PhpunitSizeDistribution\Reporter\ConsoleReporter;
+use Twada\PhpunitSizeDistribution\Subscriber\ExecutionFinishedSubscriber;
+use Twada\PhpunitSizeDistribution\Subscriber\TestPassedSubscriber;
+use Twada\PhpunitSizeDistribution\Subscriber\TestFailedSubscriber;
+use Twada\PhpunitSizeDistribution\Subscriber\TestErroredSubscriber;
 
 final class TestSizeReporterExtension implements Extension
 {

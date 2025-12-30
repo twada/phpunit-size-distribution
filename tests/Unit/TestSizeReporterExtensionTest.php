@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Twada\PhpunitSizeRatio\Tests\Unit;
+namespace Twada\PhpunitSizeDistribution\Tests\Unit;
 
 use PHPUnit\Framework\Attributes\Small;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Runner\Extension\Extension;
-use Twada\PhpunitSizeRatio\TestSizeReporterExtension;
+use Twada\PhpunitSizeDistribution\TestSizeReporterExtension;
 
 #[Small]
 final class TestSizeReporterExtensionTest extends TestCase

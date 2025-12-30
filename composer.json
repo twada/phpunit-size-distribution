@@ -1,16 +1,16 @@
 {
-    "name": "twada/phpunit-size-ratio",
+    "name": "twada/phpunit-size-distribution",
     "description": "A PHPUnit extension that measures and reports test size distribution (Small/Medium/Large)",
     "type": "library",
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Twada\\PhpunitSizeRatio\\": "src/"
+            "Twada\\PhpunitSizeDistribution\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Twada\\PhpunitSizeRatio\\Tests\\": "tests/"
+            "Twada\\PhpunitSizeDistribution\\Tests\\": "tests/"
         }
     },
     "authors": [

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Twada\PhpunitSizeRatio\Reporter;
+namespace Twada\PhpunitSizeDistribution\Reporter;
 
-use Twada\PhpunitSizeRatio\TestSizeCollector;
+use Twada\PhpunitSizeDistribution\TestSizeCollector;
 
 final class ConsoleReporter
 {
@@ -23,8 +23,8 @@ final class ConsoleReporter
 
         return sprintf(
             <<<'TEXT'
-Test Size Ratio
-===============
+Test Size Distribution
+======================
 Small:  %2d tests (%5.1f%%)
 Medium: %2d tests (%5.1f%%)
 Large:  %2d tests (%5.1f%%)

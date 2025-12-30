@@ -1,4 +1,4 @@
-# phpunit-size-ratio
+# phpunit-size-distribution
 
 A PHPUnit extension that measures and reports test size distribution (Small/Medium/Large).
 
@@ -14,7 +14,7 @@ PHPUnit supports test size classification through `#[Small]`, `#[Medium]`, and `
 ## Installation
 
 ```bash
-composer require --dev twada/phpunit-size-ratio
+composer require --dev twada/phpunit-size-distribution
 ```
 
 ## Configuration
@@ -25,7 +25,7 @@ Register the extension in your `phpunit.xml`:
 <phpunit>
     <!-- ... -->
     <extensions>
-        <bootstrap class="Twada\PhpunitSizeRatio\TestSizeReporterExtension"/>
+        <bootstrap class="Twada\PhpunitSizeDistribution\TestSizeReporterExtension"/>
     </extensions>
 </phpunit>
 ```
@@ -41,8 +41,8 @@ vendor/bin/phpunit
 After test execution, you'll see a report like this:
 
 ```
-Test Size Ratio
-===============
+Test Size Distribution
+======================
 Small:   5 tests ( 62.5%)
 Medium:  1 tests ( 12.5%)
 Large:   1 tests ( 12.5%)

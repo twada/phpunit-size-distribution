@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Twada\PhpunitSizeRatio\Tests\Unit\Subscriber;
+namespace Twada\PhpunitSizeDistribution\Tests\Unit\Subscriber;
 
 use PHPUnit\Framework\Attributes\Small;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Twada\PhpunitSizeRatio\Subscriber\TestErroredSubscriber;
-use Twada\PhpunitSizeRatio\TestSizeCollector;
+use Twada\PhpunitSizeDistribution\Subscriber\TestErroredSubscriber;
+use Twada\PhpunitSizeDistribution\TestSizeCollector;
 
 #[Small]
 final class TestErroredSubscriberTest extends TestCase

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Twada\PhpunitSizeRatio;
+namespace Twada\PhpunitSizeDistribution;
 
 final class TestSizeCollector
 {

@@ -21,7 +21,7 @@ Understanding test size distribution helps teams:
 
 ## Decision
 
-We will develop `phpunit-size-ratio`, a PHPUnit extension that measures and reports test size distribution.
+We will develop `phpunit-size-distribution`, a PHPUnit extension that measures and reports test size distribution.
 
 ### Phase 1 Scope
 
@@ -93,29 +93,29 @@ TestSizeReporterExtension (Entry point)
     └── ConsoleReporter (Formats text output)
 ```
 
-#### 5. Output Title
+#### 5. Output Title and Project Name
 
-**Decision:** Use "Test Size Ratio" as the report title
+**Decision:** Use "Test Size Distribution" as both the project name and report title
 
 **Rationale:**
 
-We considered two options:
+We initially chose "ratio" but reconsidered before release:
 
-| Option | Pros | Cons |
-|--------|------|------|
-| "Test Size Distribution" | Technically precise for showing counts/percentages | Inconsistent with project name |
-| "Test Size Ratio" | Consistent with project name `phpunit-size-ratio` | "Ratio" typically implies A:B:C format |
+| Term | Evaluation |
+|------|------------|
+| "Ratio" | Typically implies A:B:C format; less precise for counts/percentages |
+| "Distribution" | Technically accurate for showing how tests are distributed across categories |
 
-**"Test Size Ratio" was selected** because:
-- Project-wide consistency is more important than strict technical terminology
-- "Ratio" can be interpreted as "構成比" (composition ratio) in the context of percentages
-- Reduces cognitive load by aligning output title with project name
+**"Distribution" was selected** because:
+- Technically precise - the output shows how tests are distributed across size categories
+- Aligns with future features (Phase 2+) - pattern detection (pyramid, trophy, etc.) analyzes distribution shapes
+- Project name length (`phpunit-size-distribution`) is acceptable in the PHPUnit ecosystem
 
 ### Output Format
 
 ```
-Test Size Ratio
-===============
+Test Size Distribution
+======================
 Small:  45 tests (45.0%)
 Medium: 30 tests (30.0%)
 Large:  15 tests (15.0%)
@@ -126,8 +126,8 @@ Total: 100 tests
 
 ### Package Information
 
-- **Composer package:** `twada/phpunit-size-ratio`
-- **Namespace:** `Twada\PhpunitSizeRatio`
+- **Composer package:** `twada/phpunit-size-distribution`
+- **Namespace:** `Twada\PhpunitSizeDistribution`
 - **PHP version:** 8.1+
 - **PHPUnit versions:** 10.5+, 11.x, 12.x
 

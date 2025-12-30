@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Twada\PhpunitSizeRatio\Tests\Unit\Reporter;
+namespace Twada\PhpunitSizeDistribution\Tests\Unit\Reporter;
 
 use PHPUnit\Framework\Attributes\Small;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Twada\PhpunitSizeRatio\Reporter\ConsoleReporter;
-use Twada\PhpunitSizeRatio\TestSizeCollector;
+use Twada\PhpunitSizeDistribution\Reporter\ConsoleReporter;
+use Twada\PhpunitSizeDistribution\TestSizeCollector;
 
 #[Small]
 final class ConsoleReporterTest extends TestCase
@@ -22,8 +22,8 @@ final class ConsoleReporterTest extends TestCase
         $output = $reporter->generate($collector);
 
         $expected = <<<'TEXT'
-Test Size Ratio
-===============
+Test Size Distribution
+======================
 Small:   0 tests (  0.0%)
 Medium:  0 tests (  0.0%)
 Large:   0 tests (  0.0%)
@@ -55,8 +55,8 @@ TEXT;
         $output = $reporter->generate($collector);
 
         $expected = <<<'TEXT'
-Test Size Ratio
-===============
+Test Size Distribution
+======================
 Small:   5 tests ( 50.0%)
 Medium:  3 tests ( 30.0%)
 Large:   1 tests ( 10.0%)
