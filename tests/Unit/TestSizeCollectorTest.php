@@ -67,4 +67,22 @@ final class TestSizeCollectorTest extends TestCase
         $this->assertSame(1, $collector->getNoneCount());
         $this->assertSame(1, $collector->getTotalCount());
     }
+
+    #[Test]
+    public function totalCountSumsAllCategories(): void
+    {
+        $collector = new TestSizeCollector();
+
+        $collector->incrementSmall();
+        $collector->incrementSmall();
+        $collector->incrementMedium();
+        $collector->incrementLarge();
+        $collector->incrementNone();
+
+        $this->assertSame(2, $collector->getSmallCount());
+        $this->assertSame(1, $collector->getMediumCount());
+        $this->assertSame(1, $collector->getLargeCount());
+        $this->assertSame(1, $collector->getNoneCount());
+        $this->assertSame(5, $collector->getTotalCount());
+    }
 }
