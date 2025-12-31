@@ -8,6 +8,11 @@
             <directory>.</directory>
         </testsuite>
     </testsuites>
+    <source>
+        <include>
+            <directory>../../src</directory>
+        </include>
+    </source>
     <extensions>
         <bootstrap class="Twada\PhpunitSizeDistribution\TestSizeReporterExtension"/>
     </extensions>

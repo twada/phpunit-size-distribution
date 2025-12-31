@@ -59,7 +59,7 @@ jobs:
         run: composer install --prefer-dist --no-progress
 
       - name: Run tests with coverage
-        run: vendor/bin/phpunit --coverage-text --coverage-clover=build/coverage/clover.xml
+        run: composer coverage
 
   static-analysis:
     runs-on: ubuntu-latest
