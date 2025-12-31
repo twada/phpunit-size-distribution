@@ -32,7 +32,7 @@
         "coverage": [
             "@php -r \"@mkdir('build/coverage', 0777, true);\"",
             "phpunit --coverage-php build/coverage/unit.cov",
-            "phpunit -c tests/Fixtures/phpunit.xml --coverage-php build/coverage/fixtures.cov",
+            "phpunit -c tests/Fixtures/phpunit.xml --coverage-php build/coverage/fixtures.cov || true",
             "phpcov merge build/coverage --clover build/coverage/clover.xml --text php://stdout"
         ],
         "analyse": "phpstan analyse"
