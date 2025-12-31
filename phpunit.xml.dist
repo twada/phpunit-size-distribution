@@ -18,4 +18,11 @@
             <directory>src</directory>
         </include>
     </source>
+    <coverage>
+        <report>
+            <html outputDirectory="build/coverage/html"/>
+            <clover outputFile="build/coverage/clover.xml"/>
+            <text outputFile="php://stdout" showOnlySummary="true"/>
+        </report>
+    </coverage>
 </phpunit>

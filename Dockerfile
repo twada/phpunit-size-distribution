@@ -8,7 +8,9 @@ RUN apt-get update \
     && apt-get -y install \
     zlib1g-dev libzip-dev libpq-dev \
     ripgrep tree fd-find jq unzip curl htop procps git less \
-    && docker-php-ext-install zip pdo_pgsql
+    && docker-php-ext-install zip pdo_pgsql \
+    && pecl install pcov \
+    && docker-php-ext-enable pcov
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
