@@ -1,0 +1,27 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Twada\PhpunitSizeDistribution\Tests\Unit\Subscriber;
+
+use PHPUnit\Framework\Attributes\Small;
+use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\TestCase;
+use Twada\PhpunitSizeDistribution\Subscriber\TestFailedSubscriber;
+use Twada\PhpunitSizeDistribution\TestSizeCollector;
+
+#[Small]
+final class TestFailedSubscriberTest extends TestCase
+{
+    #[Test]
+    public function subscriberImplementsCorrectInterface(): void
+    {
+        $collector = new TestSizeCollector();
+        $subscriber = new TestFailedSubscriber($collector);
+
+        $this->assertInstanceOf(
+            \PHPUnit\Event\Test\FailedSubscriber::class,
+            $subscriber
+        );
+    }
+}
