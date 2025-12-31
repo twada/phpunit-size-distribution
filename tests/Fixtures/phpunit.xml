@@ -8,6 +8,7 @@
     <testsuites>
         <testsuite name="Fixtures">
             <directory>.</directory>
+            <directory suffix=".phpt">./phpt</directory>
         </testsuite>
     </testsuites>
     <source>
