@@ -9,7 +9,7 @@ use PHPUnit\Framework\Attributes\Medium;
 use PHPUnit\Framework\TestCase;
 
 #[Medium]
-final class ErroredTest extends TestCase
+final class ErroredMediumTest extends TestCase
 {
     #[DoesNotPerformAssertions]
     public function testErrored(): void
