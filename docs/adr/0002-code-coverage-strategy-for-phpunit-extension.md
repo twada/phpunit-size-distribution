@@ -52,23 +52,38 @@ Coverage drivers (PCOV, Xdebug) only collect coverage for code executed within a
 }
 ```
 
-### 2. Add Intentionally Failing/Erroring Tests to Fixtures
+### 2. Add Intentionally Failing/Erroring Tests for All Sizes
 
-**Decision:** Create test fixtures that intentionally fail or error to exercise TestFailedSubscriber and TestErroredSubscriber
+**Decision:** Create test fixtures that intentionally fail or error for each test size (Small, Medium, Large, None) to exercise all branches in TestFailedSubscriber and TestErroredSubscriber
 
-**Implementation:**
+**Rationale:**
+
+Each Subscriber's `notify()` method has four branches based on test size:
 
 ```php
-// tests/Fixtures/FailedTest.php
-#[Small]
-final class FailedTest extends TestCase
-{
-    public function testFailed(): void
-    {
-        $this->fail('Intentionally failed for coverage');
-    }
+if ($size->isSmall()) {
+    $this->collector->incrementSmall();
+} elseif ($size->isMedium()) {
+    $this->collector->incrementMedium();
+} elseif ($size->isLarge()) {
+    $this->collector->incrementLarge();
+} else {
+    $this->collector->incrementNone();
 }
 ```
+
+To cover all branches, we need fixtures for each size:
+
+| Fixture | Size | Purpose |
+|---------|------|---------|
+| FailedSmallTest | Small | Cover isSmall() branch in TestFailedSubscriber |
+| FailedMediumTest | Medium | Cover isMedium() branch |
+| FailedLargeTest | Large | Cover isLarge() branch |
+| FailedNoSizeTest | None | Cover else branch |
+| ErroredSmallTest | Small | Cover isSmall() branch in TestErroredSubscriber |
+| ErroredMediumTest | Medium | Cover isMedium() branch |
+| ErroredLargeTest | Large | Cover isLarge() branch |
+| ErroredNoSizeTest | None | Cover else branch |
 
 ### 3. Prevent "Risky Test" Classification for Erroring Tests
 
@@ -100,9 +115,9 @@ When a test throws an exception before performing any assertions:
 **Solution:**
 
 ```php
-// tests/Fixtures/ErroredTest.php
+// tests/Fixtures/ErroredMediumTest.php
 #[Medium]
-final class ErroredTest extends TestCase
+final class ErroredMediumTest extends TestCase
 {
     #[DoesNotPerformAssertions]  // Prevents "risky" classification
     public function testErrored(): void
@@ -112,9 +127,46 @@ final class ErroredTest extends TestCase
 }
 ```
 
-### 4. Unit Test ExecutionFinishedSubscriber Directly
+### 4. Unit Test Subscribers with Phpt Objects for Early Return Coverage
 
-**Decision:** Write unit tests that directly invoke notify() with mock/stub events
+**Decision:** Write unit tests that invoke notify() with `Phpt` objects to cover the early return branch
+
+**Rationale:**
+
+Each Subscriber has an early return for non-TestMethod tests:
+
+```php
+if (!$test instanceof TestMethod) {
+    return;
+}
+```
+
+This branch is triggered when PHPT tests (`.phpt` files) are executed, as they use `Phpt` objects instead of `TestMethod`. Rather than adding PHPT fixtures (which would add complexity and noise to test results), we test this directly:
+
+```php
+#[Test]
+public function notifyIgnoresNonTestMethodTests(): void
+{
+    $collector = new TestSizeCollector();
+    $subscriber = new TestPassedSubscriber($collector);
+
+    $phptTest = new Phpt('/path/to/test.phpt');
+    $event = new Passed($this->createTelemetryInfo(), $phptTest);
+
+    $subscriber->notify($event);
+
+    $this->assertSame(0, $collector->getTotalCount());
+}
+```
+
+This approach is preferred over PHPT fixtures because:
+- Unit tests provide direct, isolated coverage
+- No test count mismatch in reports (PHPT tests would not appear in Test Size Distribution)
+- Simpler test infrastructure
+
+### 5. Unit Test ExecutionFinishedSubscriber Directly
+
+**Decision:** Write unit tests that directly invoke notify() with real event objects
 
 **Rationale:**
 
@@ -139,9 +191,33 @@ public function notifyOutputsReport(): void
 }
 ```
 
-### 5. Accept Limitations for bootstrap() Testing
+### 6. Share Test Utilities via Trait
 
-**Decision:** Test only method signature via reflection; rely on Fixture tests for integration coverage
+**Decision:** Extract common test helper methods into a shared trait
+
+**Rationale:**
+
+The `createTelemetryInfo()` method was duplicated across four Subscriber test classes. We extracted it into `CreatesTelemetryInfo` trait:
+
+```php
+trait CreatesTelemetryInfo
+{
+    private function createTelemetryInfo(): Info
+    {
+        $gcStatus = new GarbageCollectorStatus(0, 0, 0, 0, 0.0, 0.0, 0.0, 0.0, false, false, false, 0);
+        $memoryUsage = MemoryUsage::fromBytes(0);
+        $hrTime = HRTime::fromSecondsAndNanoseconds(0, 0);
+        $snapshot = new Snapshot($hrTime, $memoryUsage, $memoryUsage, $gcStatus);
+        $duration = Duration::fromSecondsAndNanoseconds(0, 0);
+
+        return new Info($snapshot, $duration, $memoryUsage, $duration, $memoryUsage);
+    }
+}
+```
+
+### 7. Accept Limitations for bootstrap() Testing
+
+**Decision:** Rely solely on Fixture tests for bootstrap() coverage; no unit tests
 
 **Rationale:**
 
@@ -149,6 +225,8 @@ TestSizeReporterExtension::bootstrap() cannot be unit tested directly because:
 - `Configuration` is a final class with a massive constructor (100+ parameters)
 - `Facade` is a final class that cannot be extended
 - `EventFacade::instance()` is sealed after PHPUnit initialization
+
+Testing only the method signature via reflection was considered but rejected as it provides no real value—implementing the `Extension` interface already guarantees the correct signature at compile time.
 
 The bootstrap() method is effectively tested through Fixture tests, which exercise the full extension lifecycle.
 
@@ -162,22 +240,41 @@ The bootstrap() method is effectively tested through Fixture tests, which exerci
 6. **Added debug logging to php-code-coverage:** Discovered `Append: false` for ErroredTest
 7. **Analyzed PHPUnit TestRunner.php:** Found "risky test" logic discarding coverage
 8. **Added DoesNotPerformAssertions:** TestErroredSubscriber coverage recorded successfully
-9. **Added ExecutionFinishedSubscriber unit test:** Coverage improved to 100%
-10. **Final coverage:** 74.03% line coverage
+9. **Added ExecutionFinishedSubscriber unit test:** Coverage improved to 74.03%
+10. **Expanded Failed/Errored fixtures to all sizes:** Coverage improved to 85.71%
+11. **Added Phpt-based unit tests for early return:** All Subscribers reached 100%
+12. **Removed PHPT fixtures:** Unit tests sufficient, cleaner test output
+13. **Extracted CreatesTelemetryInfo trait:** Reduced code duplication
+14. **Removed redundant bootstrap signature test:** Interface guarantees signature
+15. **Final coverage:** 89.61% line coverage (69/77 lines)
+
+## Final Coverage Results
+
+| Component | Coverage |
+|-----------|----------|
+| ConsoleReporter | 100% |
+| TestSizeCollector | 100% |
+| TestPassedSubscriber | 100% |
+| TestFailedSubscriber | 100% |
+| TestErroredSubscriber | 100% |
+| ExecutionFinishedSubscriber | 100% |
+| TestSizeReporterExtension | 0% (bootstrap untestable) |
+| **Overall** | **89.61%** |
 
 ## Consequences
 
 ### Positive
 
 - Comprehensive coverage strategy documented for future maintainers
-- Coverage improved from 45.45% to 74.03%
-- ExecutionFinishedSubscriber now at 100% coverage
+- Coverage improved from 45.45% to 89.61%
+- All Subscriber classes at 100% coverage
 - Understanding of PHPUnit internals prevents future debugging sessions
+- Clean separation between unit tests and integration tests (Fixtures)
 
 ### Negative
 
 - Fixture tests must tolerate intentional failures/errors (`|| true` in script)
-- TestSizeReporterExtension::bootstrap() has limited direct test coverage
+- TestSizeReporterExtension::bootstrap() cannot be unit tested (0% direct coverage)
 - Coverage merge adds complexity to CI pipeline
 
 ### Lessons Learned
@@ -186,6 +283,8 @@ The bootstrap() method is effectively tested through Fixture tests, which exerci
 2. **Extension bootstrap/shutdown code is hard to unit test** - PHPUnit's event system seals after initialization
 3. **phpcov is essential for extension testing** - Coverage from multiple test configurations must be merged
 4. **Final classes in PHPUnit limit testability** - Configuration, Facade, and event classes cannot be mocked
+5. **Prefer unit tests over integration fixtures for edge cases** - Testing Phpt handling via unit tests is cleaner than adding PHPT fixtures
+6. **Test size fixtures need all sizes** - Each size (Small, Medium, Large, None) requires separate fixtures to cover all branches
 
 ## References
 
