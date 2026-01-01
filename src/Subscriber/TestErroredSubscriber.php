@@ -4,18 +4,17 @@ declare(strict_types=1);
 
 namespace Twada\PhpunitSizeDistribution\Subscriber;
 
+use PHPUnit\Event\Code\TestMethod;
 use PHPUnit\Event\Test\Errored;
 use PHPUnit\Event\Test\ErroredSubscriber;
-use PHPUnit\Event\Code\TestMethod;
 use PHPUnit\Metadata\Api\Groups;
 use Twada\PhpunitSizeDistribution\TestSizeCollector;
 
 final class TestErroredSubscriber implements ErroredSubscriber
 {
     public function __construct(
-        private readonly TestSizeCollector $collector
-    ) {
-    }
+        private readonly TestSizeCollector $collector,
+    ) {}
 
     public function notify(Errored $event): void
     {

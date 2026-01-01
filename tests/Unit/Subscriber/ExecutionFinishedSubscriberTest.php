@@ -26,7 +26,7 @@ final class ExecutionFinishedSubscriberTest extends TestCase
 
         $this->assertInstanceOf(
             \PHPUnit\Event\TestRunner\ExecutionFinishedSubscriber::class,
-            $subscriber
+            $subscriber,
         );
     }
 

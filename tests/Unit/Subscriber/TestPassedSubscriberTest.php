@@ -25,7 +25,7 @@ final class TestPassedSubscriberTest extends TestCase
 
         $this->assertInstanceOf(
             \PHPUnit\Event\Test\PassedSubscriber::class,
-            $subscriber
+            $subscriber,
         );
     }
 

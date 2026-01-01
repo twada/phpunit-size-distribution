@@ -6,12 +6,13 @@ namespace Twada\PhpunitSizeDistribution\Tests\Fixtures;
 
 use PHPUnit\Framework\Attributes\DoesNotPerformAssertions;
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
 
 final class ErroredNoSizeTest extends TestCase
 {
     #[DoesNotPerformAssertions]
     public function testErrored(): void
     {
-        throw new \RuntimeException('This test intentionally throws an exception for coverage testing');
+        throw new RuntimeException('This test intentionally throws an exception for coverage testing');
     }
 }

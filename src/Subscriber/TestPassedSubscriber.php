@@ -4,18 +4,17 @@ declare(strict_types=1);
 
 namespace Twada\PhpunitSizeDistribution\Subscriber;
 
+use PHPUnit\Event\Code\TestMethod;
 use PHPUnit\Event\Test\Passed;
 use PHPUnit\Event\Test\PassedSubscriber;
-use PHPUnit\Event\Code\TestMethod;
 use PHPUnit\Metadata\Api\Groups;
 use Twada\PhpunitSizeDistribution\TestSizeCollector;
 
 final class TestPassedSubscriber implements PassedSubscriber
 {
     public function __construct(
-        private readonly TestSizeCollector $collector
-    ) {
-    }
+        private readonly TestSizeCollector $collector,
+    ) {}
 
     public function notify(Passed $event): void
     {

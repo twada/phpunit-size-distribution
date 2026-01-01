@@ -13,9 +13,8 @@ final class ExecutionFinishedSubscriber implements ExecutionFinishedSubscriberIn
 {
     public function __construct(
         private readonly TestSizeCollector $collector,
-        private readonly ConsoleReporter $reporter
-    ) {
-    }
+        private readonly ConsoleReporter $reporter,
+    ) {}
 
     public function notify(ExecutionFinished $event): void
     {

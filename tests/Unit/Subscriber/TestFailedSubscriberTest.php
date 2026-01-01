@@ -10,6 +10,7 @@ use PHPUnit\Event\Test\Failed;
 use PHPUnit\Framework\Attributes\Small;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
 use Twada\PhpunitSizeDistribution\Subscriber\TestFailedSubscriber;
 use Twada\PhpunitSizeDistribution\TestSizeCollector;
 
@@ -26,7 +27,7 @@ final class TestFailedSubscriberTest extends TestCase
 
         $this->assertInstanceOf(
             \PHPUnit\Event\Test\FailedSubscriber::class,
-            $subscriber
+            $subscriber,
         );
     }
 
@@ -37,7 +38,7 @@ final class TestFailedSubscriberTest extends TestCase
         $subscriber = new TestFailedSubscriber($collector);
 
         $phptTest = new Phpt('/path/to/test.phpt');
-        $throwable = new Throwable(\RuntimeException::class, 'Test error', 'Test error', '', null);
+        $throwable = new Throwable(RuntimeException::class, 'Test error', 'Test error', '', null);
         $event = new Failed($this->createTelemetryInfo(), $phptTest, $throwable, null);
 
         $subscriber->notify($event);
