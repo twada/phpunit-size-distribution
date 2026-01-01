@@ -40,7 +40,7 @@ TEXT,
             $largePercent,
             $noneCount,
             $nonePercent,
-            $total
+            $total,
         );
     }
 }
