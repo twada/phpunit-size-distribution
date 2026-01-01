@@ -40,7 +40,7 @@ jobs:
           composer install --prefer-dist --no-progress
 
       - name: Run tests
-        run: vendor/bin/phpunit
+        run: vendor/bin/phpunit --no-coverage
 
   coverage:
     runs-on: ubuntu-latest
