@@ -16,10 +16,13 @@ jobs:
         php-version: ['8.1', '8.2', '8.3', '8.4']
         phpunit-version: ['10.5', '11.5', '12.1']
         exclude:
-          # PHPUnit 11.x and 12.x require PHP 8.2+
+          # PHPUnit 11.x requires PHP 8.2+
           - php-version: '8.1'
             phpunit-version: '11.5'
+          # PHPUnit 12.x requires PHP 8.3+
           - php-version: '8.1'
+            phpunit-version: '12.1'
+          - php-version: '8.2'
             phpunit-version: '12.1'
 
     name: PHP ${{ matrix.php-version }} / PHPUnit ${{ matrix.phpunit-version }}
