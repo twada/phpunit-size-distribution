@@ -25,7 +25,8 @@
     },
     "require-dev": {
         "phpstan/phpstan": "^2.1",
-        "phpunit/phpcov": "^11.0"
+        "phpunit/phpcov": "^11.0",
+        "friendsofphp/php-cs-fixer": "^3.65"
     },
     "scripts": {
         "test": "phpunit",
@@ -35,6 +36,8 @@
             "phpunit -c tests/Fixtures/phpunit.xml --coverage-php build/coverage/fixtures.cov || true",
             "phpcov merge build/coverage --clover build/coverage/clover.xml --text php://stdout"
         ],
-        "analyse": "phpstan analyse"
+        "analyse": "phpstan analyse",
+        "cs-fix": "php-cs-fixer fix",
+        "cs-check": "php-cs-fixer check --diff"
     }
 }
