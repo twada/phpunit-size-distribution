@@ -20,3 +20,8 @@ composer.lock
 
 # Build artifacts
 /build/
+
+# Local development environment
+CLAUDE.md
+Dockerfile
+compose.yml
