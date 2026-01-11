@@ -1,0 +1,18 @@
+# Distribution archive excludes
+# These files are excluded when installing via Composer
+
+# Git/GitHub
+/.github export-ignore
+/.gitattributes export-ignore
+/.gitignore export-ignore
+
+# Documentation
+/docs export-ignore
+
+# Tests
+/tests export-ignore
+/phpunit.xml.dist export-ignore
+
+# Static analysis and code style
+/phpstan.neon export-ignore
+/.php-cs-fixer.dist.php export-ignore
