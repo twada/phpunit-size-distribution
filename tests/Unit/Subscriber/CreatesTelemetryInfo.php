@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Twada\PhpunitSizeDistribution\Tests\Unit\Subscriber;
+namespace Twada\PHPUnitSizeDistribution\Tests\Unit\Subscriber;
 
 use PHPUnit\Event\Telemetry\Duration;
 use PHPUnit\Event\Telemetry\GarbageCollectorStatus;

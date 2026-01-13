@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Twada\PhpunitSizeDistribution\Reporter;
+namespace Twada\PHPUnitSizeDistribution\Reporter;
 
-use Twada\PhpunitSizeDistribution\TestSizeCollector;
+use Twada\PHPUnitSizeDistribution\TestSizeCollector;
 
 final class ConsoleReporter
 {

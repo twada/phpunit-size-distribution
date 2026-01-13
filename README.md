@@ -33,7 +33,7 @@ Register the extension in your `phpunit.xml`:
 <phpunit>
     <!-- ... -->
     <extensions>
-        <bootstrap class="Twada\PhpunitSizeDistribution\TestSizeReporterExtension"/>
+        <bootstrap class="Twada\PHPUnitSizeDistribution\TestSizeReporterExtension"/>
     </extensions>
 </phpunit>
 ```

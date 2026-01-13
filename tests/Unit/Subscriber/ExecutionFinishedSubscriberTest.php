@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Twada\PhpunitSizeDistribution\Tests\Unit\Subscriber;
+namespace Twada\PHPUnitSizeDistribution\Tests\Unit\Subscriber;
 
 use PHPUnit\Event\TestRunner\ExecutionFinished;
 use PHPUnit\Framework\Attributes\Small;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Twada\PhpunitSizeDistribution\Reporter\ConsoleReporter;
-use Twada\PhpunitSizeDistribution\Subscriber\ExecutionFinishedSubscriber;
-use Twada\PhpunitSizeDistribution\TestSizeCollector;
+use Twada\PHPUnitSizeDistribution\Reporter\ConsoleReporter;
+use Twada\PHPUnitSizeDistribution\Subscriber\ExecutionFinishedSubscriber;
+use Twada\PHPUnitSizeDistribution\TestSizeCollector;
 
 #[Small]
 final class ExecutionFinishedSubscriberTest extends TestCase
