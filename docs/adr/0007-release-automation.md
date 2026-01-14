@@ -73,7 +73,7 @@ validate-changelog ─────┬──────────────�
 ```
 
 1. **validate-changelog**: Extract version from tag, verify CHANGELOG.md has matching section, extract release notes
-2. **test**: Run tests on representative PHP/PHPUnit combinations (3 of 11)
+2. **test**: Run tests on all supported PHP/PHPUnit combinations (same as CI)
 3. **quality**: Run PHPStan and php-cs-fixer
 4. **release**: Create GitHub Release with extracted release notes
 
@@ -90,17 +90,15 @@ This extracts everything from `## [1.0.0]` up to (but not including) the next `#
 
 #### Test Matrix for Releases
 
-To balance thoroughness with release speed, the release workflow runs a subset of the full CI matrix:
+The release workflow runs the same test matrix as CI (11 combinations). Since the test suite executes quickly, there is no need to reduce the matrix for releases.
 
-| CI Workflow | Release Workflow | Rationale |
-|-------------|------------------|-----------|
-| 11 combinations | 3 combinations | Representative coverage |
-| fail-fast: false | fail-fast: true | Fail early on release |
-
-Selected combinations:
-- PHP 8.1 + PHPUnit 10.5 (minimum supported)
-- PHP 8.3 + PHPUnit 11.5 (middle ground)
-- PHP 8.4 + PHPUnit 12.1 (latest)
+| PHP | PHPUnit 10.5 | PHPUnit 11.5 | PHPUnit 12.1 |
+|-----|:------------:|:------------:|:------------:|
+| 8.1 | ✓ | - | - |
+| 8.2 | ✓ | ✓ | - |
+| 8.3 | ✓ | ✓ | ✓ |
+| 8.4 | ✓ | ✓ | ✓ |
+| 8.5 | ✓ | ✓ | ✓ |
 
 #### Validation Behavior
 
@@ -139,7 +137,6 @@ git push origin v1.0.0
 
 - Requires discipline to update CHANGELOG.md before tagging
 - If validation fails after tagging, manual cleanup may be needed (delete tag, fix, re-tag)
-- Reduced test matrix for releases (3 vs 11 combinations)
 
 ### Operational Notes
 

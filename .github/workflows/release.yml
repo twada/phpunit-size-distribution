@@ -48,15 +48,18 @@ jobs:
     runs-on: ubuntu-latest
 
     strategy:
-      fail-fast: true
+      fail-fast: false
       matrix:
-        include:
-          # Representative combinations for release validation
+        php-version: ['8.1', '8.2', '8.3', '8.4', '8.5']
+        phpunit-version: ['10.5', '11.5', '12.1']
+        exclude:
+          # PHPUnit 11.x requires PHP 8.2+
           - php-version: '8.1'
-            phpunit-version: '10.5'
-          - php-version: '8.3'
             phpunit-version: '11.5'
-          - php-version: '8.4'
+          # PHPUnit 12.x requires PHP 8.3+
+          - php-version: '8.1'
+            phpunit-version: '12.1'
+          - php-version: '8.2'
             phpunit-version: '12.1'
 
     steps:
