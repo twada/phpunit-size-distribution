@@ -1,0 +1,121 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  validate-changelog:
+    name: Validate CHANGELOG
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+      release_notes: ${{ steps.extract.outputs.release_notes }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Extract version from tag
+        id: version
+        run: echo "version=${GITHUB_REF_NAME#v}" >> $GITHUB_OUTPUT
+
+      - name: Validate CHANGELOG has version entry
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          if ! grep -q "^## \[${VERSION}\]" CHANGELOG.md; then
+            echo "::error::CHANGELOG.md does not contain entry for version ${VERSION}"
+            echo "::error::Please update CHANGELOG.md with a [${VERSION}] section before releasing."
+            exit 1
+          fi
+
+      - name: Extract release notes from CHANGELOG
+        id: extract
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          # Extract the section for this version (from "## [version]" to next "## [" or EOF)
+          # Using awk for robust handling of the last section in the file
+          NOTES=$(awk "/^## \[${VERSION}\]/{found=1} found{if(/^## \[/ && !/^## \[${VERSION}\]/) exit; print}" CHANGELOG.md)
+          # Output using heredoc delimiter for multiline support
+          echo "release_notes<<EOF" >> $GITHUB_OUTPUT
+          echo "$NOTES" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+  test:
+    name: Test (PHP ${{ matrix.php-version }} / PHPUnit ${{ matrix.phpunit-version }})
+    needs: validate-changelog
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: true
+      matrix:
+        include:
+          # Representative combinations for release validation
+          - php-version: '8.1'
+            phpunit-version: '10.5'
+          - php-version: '8.3'
+            phpunit-version: '11.5'
+          - php-version: '8.4'
+            phpunit-version: '12.1'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          coverage: none
+
+      - name: Install dependencies
+        run: |
+          composer require --no-update phpunit/phpunit:^${{ matrix.phpunit-version }}
+          composer install --prefer-dist --no-progress
+
+      - name: Run tests
+        run: vendor/bin/phpunit --no-coverage
+
+  quality:
+    name: Code Quality
+    needs: validate-changelog
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress
+
+      - name: Run PHPStan
+        run: vendor/bin/phpstan analyse
+
+      - name: Check code style
+        run: composer cs-check
+
+  release:
+    name: Create GitHub Release
+    needs: [validate-changelog, test, quality]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: v${{ needs.validate-changelog.outputs.version }}
+          body: ${{ needs.validate-changelog.outputs.release_notes }}
+          draft: false
+          prerelease: false
