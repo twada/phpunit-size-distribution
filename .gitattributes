@@ -16,3 +16,10 @@
 # Static analysis and code style
 /phpstan.neon export-ignore
 /.php-cs-fixer.dist.php export-ignore
+/.lpv export-ignore
+
+# Project-specific
+/CLAUDE.md export-ignore
+/CODE_OF_CONDUCT.md export-ignore
+/CONTRIBUTING.md export-ignore
+/SECURITY.md export-ignore

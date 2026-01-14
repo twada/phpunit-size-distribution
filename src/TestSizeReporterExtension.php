@@ -14,8 +14,19 @@ use Twada\PHPUnitSizeDistribution\Subscriber\TestErroredSubscriber;
 use Twada\PHPUnitSizeDistribution\Subscriber\TestFailedSubscriber;
 use Twada\PHPUnitSizeDistribution\Subscriber\TestPassedSubscriber;
 
+/**
+ * PHPUnit extension that reports test size distribution.
+ *
+ * This extension analyzes test suites and reports the distribution of test sizes
+ * (Small, Medium, Large, None) after test execution completes.
+ *
+ * @see https://docs.phpunit.de/en/11.5/extending-phpunit.html
+ */
 final class TestSizeReporterExtension implements Extension
 {
+    /**
+     * {@inheritDoc}
+     */
     public function bootstrap(
         Configuration $configuration,
         Facade $facade,

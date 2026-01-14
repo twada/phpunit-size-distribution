@@ -19,6 +19,19 @@
             "email": "takuto.wada@gmail.com"
         }
     ],
+    "homepage": "https://github.com/twada/phpunit-size-distribution",
+    "keywords": [
+        "phpunit",
+        "testing",
+        "test-size",
+        "test-pyramid",
+        "extension",
+        "metrics"
+    ],
+    "support": {
+        "issues": "https://github.com/twada/phpunit-size-distribution/issues",
+        "source": "https://github.com/twada/phpunit-size-distribution"
+    },
     "require": {
         "php": "^8.1",
         "phpunit/phpunit": "^10.5 || ^11.0 || ^12.0"

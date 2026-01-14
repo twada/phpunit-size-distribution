@@ -10,12 +10,24 @@ use PHPUnit\Event\Test\ErroredSubscriber;
 use PHPUnit\Metadata\Api\Groups;
 use Twada\PHPUnitSizeDistribution\TestSizeCollector;
 
+/**
+ * Subscriber that counts errored tests by their size attribute.
+ *
+ * This subscriber listens to Test\Errored events and increments the appropriate
+ * size counter in the TestSizeCollector.
+ */
 final class TestErroredSubscriber implements ErroredSubscriber
 {
+    /**
+     * @param TestSizeCollector $collector The collector to record test sizes
+     */
     public function __construct(
         private readonly TestSizeCollector $collector,
     ) {}
 
+    /**
+     * {@inheritDoc}
+     */
     public function notify(Errored $event): void
     {
         $test = $event->test();

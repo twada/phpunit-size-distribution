@@ -6,8 +6,21 @@ namespace Twada\PHPUnitSizeDistribution\Reporter;
 
 use Twada\PHPUnitSizeDistribution\TestSizeCollector;
 
+/**
+ * Generates a text-based report of test size distribution.
+ *
+ * This reporter formats the collected test size statistics into a human-readable
+ * text report suitable for console output.
+ */
 final class ConsoleReporter
 {
+    /**
+     * Generates a formatted text report from the collected test size data.
+     *
+     * @param TestSizeCollector $collector The collector containing test size statistics
+     *
+     * @return string The formatted report text
+     */
     public function generate(TestSizeCollector $collector): string
     {
         $total = $collector->getTotalCount();
