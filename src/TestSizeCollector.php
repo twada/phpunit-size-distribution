@@ -16,14 +16,14 @@ final class TestSizeCollector
         $this->smallCount++;
     }
 
-    public function incrementMedium(): void
-    {
-        $this->mediumCount++;
-    }
-
     public function getSmallCount(): int
     {
         return $this->smallCount;
+    }
+
+    public function incrementMedium(): void
+    {
+        $this->mediumCount++;
     }
 
     public function getMediumCount(): int
