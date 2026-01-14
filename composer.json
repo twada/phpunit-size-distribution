@@ -5,12 +5,12 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Twada\\PhpunitSizeDistribution\\": "src/"
+            "Twada\\PHPUnitSizeDistribution\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Twada\\PhpunitSizeDistribution\\Tests\\": "tests/"
+            "Twada\\PHPUnitSizeDistribution\\Tests\\": "tests/"
         }
     },
     "authors": [

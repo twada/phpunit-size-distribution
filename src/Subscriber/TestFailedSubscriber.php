@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Twada\PhpunitSizeDistribution\Subscriber;
+namespace Twada\PHPUnitSizeDistribution\Subscriber;
 
 use PHPUnit\Event\Code\TestMethod;
 use PHPUnit\Event\Test\Failed;
 use PHPUnit\Event\Test\FailedSubscriber;
 use PHPUnit\Metadata\Api\Groups;
-use Twada\PhpunitSizeDistribution\TestSizeCollector;
+use Twada\PHPUnitSizeDistribution\TestSizeCollector;
 
 final class TestFailedSubscriber implements FailedSubscriber
 {

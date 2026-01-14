@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Twada\PhpunitSizeDistribution\Tests\Unit\Subscriber;
+namespace Twada\PHPUnitSizeDistribution\Tests\Unit\Subscriber;
 
 use PHPUnit\Event\Code\Phpt;
 use PHPUnit\Event\Code\Throwable;
@@ -11,8 +11,8 @@ use PHPUnit\Framework\Attributes\Small;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
-use Twada\PhpunitSizeDistribution\Subscriber\TestErroredSubscriber;
-use Twada\PhpunitSizeDistribution\TestSizeCollector;
+use Twada\PHPUnitSizeDistribution\Subscriber\TestErroredSubscriber;
+use Twada\PHPUnitSizeDistribution\TestSizeCollector;
 
 #[Small]
 final class TestErroredSubscriberTest extends TestCase

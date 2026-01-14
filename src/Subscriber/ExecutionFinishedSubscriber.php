@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Twada\PhpunitSizeDistribution\Subscriber;
+namespace Twada\PHPUnitSizeDistribution\Subscriber;
 
 use PHPUnit\Event\TestRunner\ExecutionFinished;
 use PHPUnit\Event\TestRunner\ExecutionFinishedSubscriber as ExecutionFinishedSubscriberInterface;
-use Twada\PhpunitSizeDistribution\Reporter\ConsoleReporter;
-use Twada\PhpunitSizeDistribution\TestSizeCollector;
+use Twada\PHPUnitSizeDistribution\Reporter\ConsoleReporter;
+use Twada\PHPUnitSizeDistribution\TestSizeCollector;
 
 final class ExecutionFinishedSubscriber implements ExecutionFinishedSubscriberInterface
 {

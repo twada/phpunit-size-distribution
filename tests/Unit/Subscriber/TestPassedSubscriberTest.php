@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Twada\PhpunitSizeDistribution\Tests\Unit\Subscriber;
+namespace Twada\PHPUnitSizeDistribution\Tests\Unit\Subscriber;
 
 use PHPUnit\Event\Code\Phpt;
 use PHPUnit\Event\Test\Passed;
 use PHPUnit\Framework\Attributes\Small;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Twada\PhpunitSizeDistribution\Subscriber\TestPassedSubscriber;
-use Twada\PhpunitSizeDistribution\TestSizeCollector;
+use Twada\PHPUnitSizeDistribution\Subscriber\TestPassedSubscriber;
+use Twada\PHPUnitSizeDistribution\TestSizeCollector;
 
 #[Small]
 final class TestPassedSubscriberTest extends TestCase

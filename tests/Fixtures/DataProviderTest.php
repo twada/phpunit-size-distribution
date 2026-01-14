@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Twada\PhpunitSizeDistribution\Tests\Fixtures;
+namespace Twada\PHPUnitSizeDistribution\Tests\Fixtures;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Small;

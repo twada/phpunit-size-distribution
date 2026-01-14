@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Twada\PhpunitSizeDistribution\Tests\Unit;
+namespace Twada\PHPUnitSizeDistribution\Tests\Unit;
 
 use PHPUnit\Framework\Attributes\Small;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Twada\PhpunitSizeDistribution\TestSizeCollector;
+use Twada\PHPUnitSizeDistribution\TestSizeCollector;
 
 #[Small]
 final class TestSizeCollectorTest extends TestCase
