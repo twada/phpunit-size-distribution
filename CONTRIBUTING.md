@@ -150,6 +150,45 @@ TestSizeReporterExtension (Entry point, registers subscribers)
     └── ConsoleReporter (Formats text output to stdout)
 ```
 
+## Releasing (for Maintainers)
+
+This project uses automated release workflow. When a version tag is pushed, GitHub Actions validates the CHANGELOG, runs tests, and creates a GitHub Release automatically.
+
+### Release Process
+
+1. **Update CHANGELOG.md**
+   - Change `[Unreleased]` to `[X.Y.Z] - YYYY-MM-DD`
+   - Add a new `[Unreleased]` section at the top for future changes
+
+2. **Commit and push**
+   ```bash
+   git commit -am "chore(release): prepare vX.Y.Z"
+   git push
+   ```
+
+3. **Create and push tag**
+   ```bash
+   git tag vX.Y.Z
+   git push origin vX.Y.Z
+   ```
+
+4. **Automated steps** (handled by CI)
+   - Validates CHANGELOG.md has entry for the version
+   - Runs tests on all PHP/PHPUnit combinations
+   - Runs PHPStan and code style checks
+   - Creates GitHub Release with release notes from CHANGELOG
+   - Packagist automatically detects the new tag
+
+### If Release Fails
+
+If the release workflow fails (e.g., CHANGELOG not updated):
+
+```bash
+git tag -d vX.Y.Z              # Delete local tag
+git push origin :vX.Y.Z        # Delete remote tag
+# Fix the issue, commit, push, then re-tag
+```
+
 ## Questions?
 
 If you have questions, feel free to open an issue for discussion.
