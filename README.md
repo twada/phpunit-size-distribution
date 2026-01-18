@@ -1,12 +1,12 @@
 # phpunit-size-distribution
 
-[![CI](https://github.com/twada/phpunit-size-distribution/actions/workflows/ci.yml/badge.svg)](https://github.com/twada/phpunit-size-distribution/actions/workflows/ci.yml)
-<!-- [![codecov](https://codecov.io/gh/twada/phpunit-size-distribution/graph/badge.svg)](https://codecov.io/gh/twada/phpunit-size-distribution) -->
-<!-- [![Latest Stable Version](https://poser.pugx.org/twada/phpunit-size-distribution/v)](https://packagist.org/packages/twada/phpunit-size-distribution) -->
-![PHP Version](https://img.shields.io/badge/php-8.1%2B-blue)
-![PHPUnit Version](https://img.shields.io/badge/phpunit-10.5%2B%20%7C%2011.x%20%7C%2012.x-blue)
-![PHPStan Level](https://img.shields.io/badge/phpstan-level%208-brightgreen)
-[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+[![CI][ci-image]][ci-url]
+[![codecov][codecov-image]][codecov-url]
+[![Latest Stable Version][packagist-image]][packagist-url]
+![PHP Version][php-version-image]
+![PHPUnit Version][phpunit-version-image]
+![PHPStan Level][phpstan-image]
+[![License][license-image]][license-url]
 
 A PHPUnit extension that measures and reports test size distribution (Small/Medium/Large).
 
@@ -110,3 +110,15 @@ MIT License. See [LICENSE](LICENSE) for details.
 ## Author
 
 Takuto Wada
+
+[ci-image]: https://github.com/twada/phpunit-size-distribution/actions/workflows/ci.yml/badge.svg
+[ci-url]: https://github.com/twada/phpunit-size-distribution/actions/workflows/ci.yml
+[codecov-image]: https://codecov.io/gh/twada/phpunit-size-distribution/graph/badge.svg?token=BWM5I94DIH
+[codecov-url]: https://codecov.io/gh/twada/phpunit-size-distribution
+[packagist-image]: https://poser.pugx.org/twada/phpunit-size-distribution/v
+[packagist-url]: https://packagist.org/packages/twada/phpunit-size-distribution
+[php-version-image]: https://img.shields.io/badge/php-8.1%2B-blue
+[phpunit-version-image]: https://img.shields.io/badge/phpunit-10.5%2B%20%7C%2011.x%20%7C%2012.x-blue
+[phpstan-image]: https://img.shields.io/badge/phpstan-level%208-brightgreen
+[license-image]: https://img.shields.io/badge/license-MIT-green
+[license-url]: LICENSE
