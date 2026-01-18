@@ -1,7 +1,7 @@
 # phpunit-size-distribution
 
 [![CI](https://github.com/twada/phpunit-size-distribution/actions/workflows/ci.yml/badge.svg)](https://github.com/twada/phpunit-size-distribution/actions/workflows/ci.yml)
-[![codecov](https://codecov.io/gh/twada/phpunit-size-distribution/graph/badge.svg)](https://codecov.io/gh/twada/phpunit-size-distribution)
+[![codecov](https://codecov.io/gh/twada/phpunit-size-distribution/graph/badge.svg?token=BWM5I94DIH)](https://codecov.io/gh/twada/phpunit-size-distribution)
 [![Latest Stable Version](https://poser.pugx.org/twada/phpunit-size-distribution/v)](https://packagist.org/packages/twada/phpunit-size-distribution)
 ![PHP Version](https://img.shields.io/badge/php-8.1%2B-blue)
 ![PHPUnit Version](https://img.shields.io/badge/phpunit-10.5%2B%20%7C%2011.x%20%7C%2012.x-blue)
