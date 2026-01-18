@@ -1,0 +1,28 @@
+# Codecov configuration
+# https://docs.codecov.com/docs/codecov-yaml
+
+coverage:
+  status:
+    # Project coverage: overall coverage of the entire codebase
+    project:
+      default:
+        # Use the coverage of the base commit as the target
+        target: auto
+        # Allow coverage to drop by up to 1% without failing
+        threshold: 1%
+    # Patch coverage: coverage of lines changed in the PR
+    patch:
+      default:
+        # Use the coverage of the base commit as the target
+        target: auto
+        # Allow patch coverage to be up to 1% below the target
+        threshold: 1%
+
+comment:
+  # Components to include in PR comments
+  # reach: upload health, diff: coverage diff, flags: flag status, files: file-by-file breakdown
+  layout: "reach,diff,flags,files"
+  # Post new comment on each push (default behavior)
+  behavior: default
+  # Only post a comment if there are coverage changes
+  require_changes: true
