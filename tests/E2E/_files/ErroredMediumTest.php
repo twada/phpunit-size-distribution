@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Twada\PHPUnitSizeDistribution\Tests\Fixtures;
+namespace Twada\PHPUnitSizeDistribution\Tests\E2E;
 
 use PHPUnit\Framework\Attributes\DoesNotPerformAssertions;
 use PHPUnit\Framework\Attributes\Medium;
