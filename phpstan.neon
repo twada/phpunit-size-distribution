@@ -4,4 +4,4 @@ parameters:
         - src
         - tests
     excludePaths:
-        - tests/Fixtures
+        - tests/E2E/_files

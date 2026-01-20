@@ -12,6 +12,10 @@
         <testsuite name="Unit">
             <directory>tests/Unit</directory>
         </testsuite>
+        <testsuite name="E2E">
+            <directory suffix=".phpt">tests/E2E</directory>
+            <exclude>tests/E2E/_files</exclude>
+        </testsuite>
     </testsuites>
     <source>
         <include>
