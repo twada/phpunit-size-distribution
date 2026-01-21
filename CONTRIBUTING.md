@@ -59,10 +59,10 @@ vendor/bin/phpunit tests/Unit/TestSizeCollectorTest.php
 # Run a single test method
 vendor/bin/phpunit --filter testMethodName
 
-# Run fixture tests (integration tests)
-vendor/bin/phpunit -c tests/Fixtures/phpunit.xml
+# Run E2E tests only
+vendor/bin/phpunit --testsuite E2E
 
-# Code coverage (merges Unit + Fixture tests)
+# Code coverage (merges Unit + E2E tests)
 composer coverage
 
 # Static analysis (PHPStan level 8)
@@ -89,8 +89,10 @@ This project follows **Test-Driven Development (TDD)**:
 ## Testing Strategy
 
 - **Unit tests (`tests/Unit/`)**: Direct component testing with mocks
-- **Fixture tests (`tests/Fixtures/`)**: Integration tests that run actual PHPUnit tests through the extension
+- **E2E tests (`tests/E2E/`)**: PHPT-based tests that verify extension output by running actual PHPUnit tests
 - **Coverage merging**: Two test suites are run separately and merged with phpcov
+
+For details on the testing strategy, see [ADR 0009](docs/adr/0009-e2e-testing-with-phpt.md).
 
 ## Commit Messages
 
