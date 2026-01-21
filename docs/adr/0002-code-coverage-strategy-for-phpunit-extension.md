@@ -286,6 +286,10 @@ The bootstrap() method is effectively tested through Fixture tests, which exerci
 5. **Prefer unit tests over integration fixtures for edge cases** - Testing Phpt handling via unit tests is cleaner than adding PHPT fixtures
 6. **Test size fixtures need all sizes** - Each size (Small, Medium, Large, None) requires separate fixtures to cover all branches
 
+## Related Decisions
+
+- [ADR 0009: E2E Testing Strategy with PHPT](./0009-e2e-testing-with-phpt.md) - Migrated fixture tests to PHPT-based E2E tests
+
 ## References
 
 - [PHPUnit Test Risky Configuration](https://docs.phpunit.de/en/11.5/risky-tests.html)

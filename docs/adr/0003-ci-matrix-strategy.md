@@ -136,6 +136,10 @@ When adding new PHP versions:
 1. Check if it meets minimum requirements for all PHPUnit versions in matrix
 2. Add exclusions for incompatible PHPUnit versions if needed
 
+## Related Decisions
+
+- [ADR 0009: E2E Testing Strategy with PHPT](./0009-e2e-testing-with-phpt.md) - E2E tests now run in all CI matrix configurations
+
 ## References
 
 - [PHPUnit Version Support](https://phpunit.de/supported-versions.html)

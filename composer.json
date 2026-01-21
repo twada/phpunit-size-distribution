@@ -46,8 +46,8 @@
         "test": "phpunit",
         "coverage": [
             "@php -r \"@mkdir('build/coverage', 0777, true);\"",
-            "phpunit --coverage-php build/coverage/unit.cov",
-            "phpunit -c tests/Fixtures/phpunit.xml --coverage-php build/coverage/fixtures.cov || true",
+            "phpunit --testsuite Unit --coverage-php build/coverage/unit.cov",
+            "phpunit --testsuite E2E --coverage-php build/coverage/e2e.cov || true",
             "phpcov merge build/coverage --clover build/coverage/clover.xml --text php://stdout"
         ],
         "analyse": "phpstan analyse",
