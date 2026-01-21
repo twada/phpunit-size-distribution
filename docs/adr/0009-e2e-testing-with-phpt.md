@@ -134,6 +134,22 @@ PHPT tests run `(new PHPUnit\TextUI\Application)->run()` in the same process, so
 - Follows PHPUnit's own testing patterns
 - Single `vendor/bin/phpunit` command runs both Unit and E2E tests
 - No fixture duplication—same files used for E2E testing and coverage
+- **Code coverage improved from 91.48% to 100%**
+
+### Coverage Improvement
+
+The PHPT-based E2E testing approach resolved a long-standing coverage gap documented in ADR 0002.
+
+Previously, `TestSizeReporterExtension::bootstrap()` could not be covered because:
+- It is called by PHPUnit before coverage collection starts
+- The class uses final PHPUnit classes that cannot be mocked
+
+With PHPT tests, `(new PHPUnit\TextUI\Application)->run()` executes in the same process as the outer PHPUnit run. This means the extension's `bootstrap()` method is called within the coverage collection scope, and its execution is now properly tracked.
+
+| Component | Before | After |
+|-----------|--------|-------|
+| TestSizeReporterExtension | 0% | 100% |
+| **Overall** | **91.48%** | **100%** |
 
 ### Negative
 
