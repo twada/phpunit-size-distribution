@@ -116,7 +116,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           name: v${{ needs.validate-changelog.outputs.version }}
           body: ${{ needs.validate-changelog.outputs.release_notes }}
